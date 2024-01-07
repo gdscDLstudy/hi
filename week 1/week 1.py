@@ -61,7 +61,7 @@ train_acc = []
 test_acc = []
 
 # 10에폭만큼 학습
-for epoch in range(10):
+for epoch in range(5):
     # model.eval()하면 평가모드(evaluation)으로 바뀌고 기울기 갱신이 안됨. 그 후에 test_loader 가져와서 테스트
     model.eval()
     correct2 = 0
