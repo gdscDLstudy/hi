@@ -17,7 +17,7 @@ test = torchvision.datasets.MNIST('/MNIST', train=False, download=True,
 
 # line 19, 20 : 데이터셋을 DataLoader함수를 사용해서 for문으로 뽑기 좋게 만들기
 train_loader = torch.utils.data.DataLoader(dataset=train, batch_size=100, shuffle=True)
-test_loader = torch.utils.data.DataLoader(dataset=train, batch_size=100, shuffle=False)
+test_loader = torch.utils.data.DataLoader(dataset=test, batch_size=100, shuffle=False)
 
 # 텐서 연산을 cpu나 gpu 둘 중 한 곳에서 다같이 해야해서 device를 정하는 부분, 저는 gpu사용해서 else cpu 부분이 없어요
 cuda = torch.device('cuda')
@@ -30,11 +30,11 @@ class MLP(nn.Module):
         # layer를 nn.Sequential로 구현
         # nn.Sequential은 레이어들을 묶어서 만들기 좋음, 로우레벨 구현할 때는 안쓰게 될거에요
         # nn.Linear = fully-connected layer / 입력 사이즈가 28*28=784이니 (784, 256) 크기의 W만들어주는 겁니다. 여기서 256은 뉴런 갯수니까 알아서 정해보세요
-        self.layer = nn.Sequential(nn.Linear(784, 256),
+        self.layer = nn.Sequential(nn.Linear(784, 64),
                                    nn.ReLU(True),
-                                   nn.Linear(256, 128),
+                                   nn.Linear(64, 64),
                                    nn.ReLU(True),
-                                   nn.Linear(128, 10))
+                                   nn.Linear(64, 10))
 
     def forward(self, x):
         x = x.view(x.size(0), -1)
